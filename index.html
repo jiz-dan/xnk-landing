@@ -4,170 +4,485 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>XNK Gym OS</title>
-<meta name="description" content="XNK Gym OS -- sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner. Coba demo langsung.">
+<meta name="description" content="XNK Gym OS -- sistem operasional gym: membership, PT & kelas, POS, check-in, staf, dan laporan owner dalam satu sistem terintegrasi. Coba demo langsung, tanpa PDF.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://xnkproduction.web.id/">
 
-<!-- Favicon -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" href="favicon-32.png" type="image/png" sizes="32x32">
 <link rel="icon" href="favicon-48.png" type="image/png" sizes="48x48">
 <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
 <link rel="manifest" href="site.webmanifest">
 
-<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="XNK Gym OS">
-<meta property="og:title" content="XNK Gym OS">
-<meta property="og:description" content="Sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner. Coba demo langsung.">
+<meta property="og:title" content="XNK Gym OS -- Satu Sistem, Seluruh Operasional Gym">
+<meta property="og:description" content="Membership, PT & kelas, POS, check-in, staf, dan laporan owner dalam satu sistem terintegrasi. Coba demo langsung.">
 <meta property="og:url" content="https://xnkproduction.web.id/">
 <meta property="og:image" content="https://xnkproduction.web.id/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="XNK Gym OS">
-<meta name="twitter:description" content="Sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner. Coba demo langsung.">
+<meta name="twitter:description" content="Membership, PT & kelas, POS, check-in, staf, dan laporan owner dalam satu sistem terintegrasi. Coba demo langsung.">
 <meta name="twitter:image" content="https://xnkproduction.web.id/og-image.png">
-
-<style>
-  :root {
-    --ink-900: #0A0A0A; --ink-800: #1C1C1C; --ink-700: #2E2E2E; --ink-600: #4A4A4A;
-    --ink-500: #666666; --ink-400: #909090; --ink-300: #BDBDBD; --ink-200: #DEDEDE;
-    --ink-100: #EFEFEF; --ink-050: #F7F7F7; --white: #FFFFFF; --bg-app: #F5F5F5;
-  }
-  * { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; }
-  body {
-    background: var(--bg-app);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    color: var(--ink-800);
-  }
-
-  /* ---- Hero ---- */
-  .hero {
-    background: linear-gradient(-45deg, #F7F7F7, #F0F0F0, #EDEDED, #F7F7F7);
-    background-size: 400% 400%; animation: meshDrift 15s ease infinite;
-    display: flex; align-items: center; justify-content: center;
-    padding: 64px 20px 56px;
-  }
-  @keyframes meshDrift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  .hero-card {
-    width: 100%; max-width: 560px; padding: 40px 34px;
-    background: var(--white); border-radius: 24px;
-    box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08), 0 8px 16px -4px rgba(0,0,0,0.04);
-    text-align: center;
-  }
-  .hero-card h1 {
-    margin: 0 0 10px; font-size: 16px; font-weight: 800; letter-spacing: 0.02em;
-    text-transform: uppercase; color: var(--ink-900);
-  }
-  .hero-card p { margin: 0; font-size: 13.5px; color: var(--ink-500); line-height: 1.6; }
-
-  /* ---- Sections ---- */
-  section.block { max-width: 880px; margin: 0 auto; padding: 48px 20px; }
-  h2.section-title {
-    margin: 0 0 22px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--ink-600); text-align: center;
-  }
-
-  /* ---- Feature grid ---- */
-  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .feature {
-    background: var(--white); border: 1px solid var(--ink-100); border-radius: 14px;
-    padding: 16px 14px;
-  }
-  .feature .name { font-size: 12.5px; font-weight: 700; color: var(--ink-800); margin: 0 0 4px; }
-  .feature .desc { font-size: 11.5px; color: var(--ink-500); line-height: 1.45; margin: 0; }
-
-  /* ---- Demo cards ---- */
-  .demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .demo-card {
-    background: var(--white); border: 1px solid var(--ink-100); border-radius: 16px;
-    padding: 22px 18px; text-align: center;
-  }
-  .demo-card .role {
-    font-size: 12px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
-    color: var(--ink-900); margin: 0 0 12px;
-  }
-  .demo-card .cred-row { font-size: 12px; color: var(--ink-600); margin: 0 0 4px; }
-  .demo-card .cred-row b { color: var(--ink-800); font-weight: 700; }
-  .demo-card a.try-btn {
-    display: inline-block; margin-top: 14px; padding: 9px 20px; border-radius: 999px;
-    background: var(--ink-900); color: var(--white); text-decoration: none;
-    font-size: 12px; font-weight: 700;
-  }
-  .demo-card a.try-btn:hover { background: var(--ink-700); }
-  .demo-note {
-    text-align: center; font-size: 11.5px; color: var(--ink-400); margin: 18px 0 0;
-  }
-
-  /* ---- Footer ---- */
-  footer {
-    background: var(--ink-900); padding: 36px 20px; display: flex;
-    flex-direction: column; align-items: center; gap: 10px;
-  }
-  footer img { width: 130px; height: auto; }
-  footer p { margin: 0; font-size: 11px; color: var(--ink-400); }
-
-  @media (max-width: 720px) {
-    .features { grid-template-columns: repeat(2, 1fr); }
-    .demo-grid { grid-template-columns: 1fr; }
-  }
-</style>
 </head>
 <body>
 
-<div class="hero">
-  <div class="hero-card">
-    <h1>XNK Gym OS</h1>
-    <p>Membership, PT dan paket kelas, POS, absensi, payroll, booking kelas, invoicing, dan laporan owner.</p>
+<!-- ============ NAVBAR ============ -->
+<header class="navbar">
+  <div class="wrap">
+    <a href="#" class="brand">XNK Gym OS</a>
+    <nav class="desktop-links">
+      <a class="navlink" href="#fitur">Fitur</a>
+      <a class="navlink" href="#cara-kerja">Cara Kerja</a>
+      <a class="navlink" href="#demo">Demo</a>
+      <a class="navlink" href="#custom">Sistem Custom</a>
+    </nav>
+    <div class="nav-cta desktop-links">
+      <a class="btn btn-primary" href="#demo">Coba Demo</a>
+    </div>
+    <button class="hamburger" aria-label="Buka menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-</div>
+  <div class="mobile-nav">
+    <a href="#fitur">Fitur</a>
+    <a href="#cara-kerja">Cara Kerja</a>
+    <a href="#demo">Demo</a>
+    <a href="#custom">Sistem Custom</a>
+    <a href="#demo">Coba Demo</a>
+  </div>
+</header>
 
-<section class="block">
-  <h2 class="section-title">Fitur</h2>
-  <div class="features">
-    <div class="feature"><p class="name">Membership &amp; Renewal</p><p class="desc">Registrasi, perpanjangan, cuti, riwayat member.</p></div>
-    <div class="feature"><p class="name">POS Kasir</p><p class="desc">Penjualan produk di front desk.</p></div>
-    <div class="feature"><p class="name">Booking Kelas</p><p class="desc">Jadwal mingguan, sesi kelas, dan pemesanan.</p></div>
-    <div class="feature"><p class="name">Absensi QR</p><p class="desc">Check-in QR, Google Form, manual, dan arsip.</p></div>
-    <div class="feature"><p class="name">Payroll</p><p class="desc">Absensi shift, lembur, dan gaji staf.</p></div>
-    <div class="feature"><p class="name">Dashboard &amp; Laporan Owner</p><p class="desc">Metrik, laporan, dan agregasi otomatis.</p></div>
-    <div class="feature"><p class="name">Notifikasi WhatsApp</p><p class="desc">Pengingat expired, feedback, ucapan ulang tahun.</p></div>
-    <div class="feature"><p class="name">Pembayaran QRIS</p><p class="desc">Invoicing dengan QRIS dinamis.</p></div>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">XNK Gym OS</p>
+      <h1>Kelola Gym Anda.<br>Dari Satu Sistem.</h1>
+      <p class="hero-sub">XNK Gym OS menggabungkan manajemen membership, pembayaran, check-in, PT, kelas, POS, monitoring staf, laporan, dan layanan mandiri member dalam satu sistem terintegrasi.</p>
+      <div class="hero-ctas">
+        <a class="btn btn-primary" href="#demo">Coba Demo Langsung &rarr;</a>
+        <a class="btn btn-secondary" href="#cara-kerja">Lihat Cara Kerjanya</a>
+      </div>
+      <p class="trust-line">Dibangun untuk operasional gym yang nyata. Dirancang mengikuti alur kerja Anda.</p>
+    </div>
+  </div>
+  <div class="wrap reveal" style="margin-top: 48px;">
+    <div class="mockup-frame">
+      <div class="mockup-chrome"><span></span><span></span><span></span></div>
+      <img src="screenshots/admin-dashboard.png" alt="Tampilan Dashboard Admin XNK Gym OS: ringkasan check-in, member baru, transaksi, quick visit, dan panel POS Kasir" width="1600" height="900">
+    </div>
   </div>
 </section>
 
-<section class="block">
-  <h2 class="section-title">Coba Demo</h2>
-  <div class="demo-grid">
-    <div class="demo-card">
-      <p class="role">Admin</p>
-      <p class="cred-row">Nama: <b>Demo Admin</b></p>
-      <p class="cred-row">Password: <b>demo1234</b></p>
-      <a class="try-btn" href="https://admin.xnkproduction.web.id" target="_blank" rel="noopener">Buka Admin</a>
+<!-- ============ PRODUCT EXPERIENCE / FEATURE EXPLORER ============ -->
+<section class="section" id="fitur">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Fitur</p>
+    <h2 class="section-title">Lihat Apa yang Bisa Dijalankan<br>Gym Anda dari Satu Sistem</h2>
+  </div>
+  <div class="wrap reveal">
+    <div class="explorer-tabs" role="tablist">
+      <button class="explorer-tab" aria-selected="true" data-target="panel-01">01 -- Registrasi &amp; Transaksi</button>
+      <button class="explorer-tab" aria-selected="false" data-target="panel-02">02 -- Membership &amp; Paket</button>
+      <button class="explorer-tab" aria-selected="false" data-target="panel-03">03 -- POS</button>
+      <button class="explorer-tab" aria-selected="false" data-target="panel-04">04 -- Check-In &amp; Data Member</button>
+      <button class="explorer-tab" aria-selected="false" data-target="panel-05">05 -- Staf &amp; Shift</button>
+      <button class="explorer-tab" aria-selected="false" data-target="panel-06">06 -- Dashboard Owner</button>
     </div>
-    <div class="demo-card">
-      <p class="role">Owner</p>
-      <p class="cred-row">Nama: <b>Demo Owner</b></p>
-      <p class="cred-row">Password: <b>demo1234</b></p>
-      <a class="try-btn" href="https://owner.xnkproduction.web.id" target="_blank" rel="noopener">Buka Owner</a>
+
+    <div class="explorer-panel active" id="panel-01">
+      <div class="explorer-copy">
+        <p class="lead">Kelola registrasi baru, perpanjangan, quick visit, diskon, dan pembayaran dari satu alur kerja.</p>
+        <ul class="explorer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Registrasi Member Baru</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Membership Pasangan</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Quick Visit</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Perpanjangan Membership</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Diskon Manual</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Pembayaran Cash &amp; QRIS</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Biaya Membership</li>
+        </ul>
+      </div>
+      <div class="explorer-visual text-only">
+        <div>
+          <svg class="big-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+          <p>Satu form, satu alur -- dari member baru sampai pembayaran selesai.</p>
+        </div>
+      </div>
     </div>
-    <div class="demo-card">
-      <p class="role">Member</p>
-      <p class="cred-row">Nomor WA: <b>081234567890</b></p>
-      <a class="try-btn" href="https://member.xnkproduction.web.id" target="_blank" rel="noopener">Buka Member</a>
+
+    <div class="explorer-panel" id="panel-02">
+      <div class="explorer-copy">
+        <p class="lead">Status membership dan paket setiap member terorganisir otomatis, tanpa dicek manual satu per satu.</p>
+        <ul class="explorer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Status Membership</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Paket PT</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Paket Kelas</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sisa Sesi</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Kadaluarsa Paket</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Kadaluarsa Membership</li>
+        </ul>
+      </div>
+      <div class="explorer-visual text-only">
+        <div>
+          <svg class="big-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="m9 16 2 2 4-4"/></svg>
+          <p>Sisa sesi dan tanggal kadaluarsa terpantau otomatis untuk setiap member.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="explorer-panel" id="panel-03">
+      <div class="explorer-copy">
+        <p class="lead">Jual produk dan add-on ritel tanpa keluar dari sistem manajemen gym Anda.</p>
+        <ul class="explorer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Grid Produk</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Keranjang Belanja</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Pembayaran Cash</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Pembayaran QRIS</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sidebar POS Persisten</li>
+        </ul>
+      </div>
+      <div class="explorer-visual">
+        <img src="screenshots/admin-dashboard.png" alt="Panel POS Kasir XNK Gym OS: grid produk, keranjang belanja, dan total pembayaran" loading="lazy" width="1600" height="900">
+      </div>
+    </div>
+
+    <div class="explorer-panel" id="panel-04">
+      <div class="explorer-copy">
+        <p class="lead">Akses data member, check-in, riwayat, dan status membership dalam hitungan detik.</p>
+        <ul class="explorer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Pencarian Member</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Check-In Manual</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Daftar Member</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Riwayat Member</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Kalender</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Aksi Member</li>
+        </ul>
+      </div>
+      <div class="explorer-visual text-only">
+        <div>
+          <svg class="big-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="21" y1="17.5" x2="21" y2="17.51"/><line x1="17.5" y1="14" x2="17.5" y2="17.5"/><line x1="14" y1="17.5" x2="17.5" y2="17.5"/><line x1="17.5" y1="21" x2="21" y2="21"/></svg>
+          <p>Check-in QR, pencarian, dan riwayat member -- semua dari satu layar.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="explorer-panel" id="panel-05">
+      <div class="explorer-copy">
+        <p class="lead">Pantau kehadiran staf dan kelola akses berdasarkan akun dan role masing-masing.</p>
+        <ul class="explorer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Clock In / Clock Out</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Shift Pagi / Siang</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Role Staf</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Manajemen Staf</li>
+        </ul>
+        <p class="lead" style="margin-top: 18px; font-size: 12.5px;">Sistem mendukung role Owner, Manager/SPV, dan Admin.</p>
+      </div>
+      <div class="explorer-visual text-only">
+        <div>
+          <svg class="big-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 16 14"/></svg>
+          <p>Kehadiran dan shift staf tercatat otomatis per akun.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="explorer-panel" id="panel-06">
+      <div class="explorer-copy">
+        <p class="lead">Ringkasan harian dan bulanan tanpa perlu direkap manual satu per satu.</p>
+        <ul class="explorer-list">
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Ringkasan Hari Ini &amp; Bulan Ini</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Transaksi Terbaru</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Member Baru</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Quick Visit Terbaru</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Penjualan POS</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Check-In Member</li>
+        </ul>
+      </div>
+      <div class="explorer-visual">
+        <img src="screenshots/owner-ringkasan.png" alt="Dashboard Ringkasan Owner XNK Gym OS: transaksi terbaru, member baru, quick visit, penjualan POS, dan check-in member" loading="lazy" width="1600" height="900">
+      </div>
     </div>
   </div>
-  <p class="demo-note">Data demo -- bebas dieksplor, jangan dijadikan acuan data gym asli.</p>
 </section>
 
+<!-- ============ DASHBOARD OWNER (deep section) ============ -->
+<section class="section alt">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Dashboard Owner</p>
+    <h2 class="section-title">Ketahui Kondisi Gym Anda<br>Tanpa Rekap Manual</h2>
+    <p class="section-sub">Sistem sudah menyediakan ringkasan admin real-time dan dashboard owner mencakup revenue, membership, produk/kelas, kehadiran, revenue sesi, dan laporan monitoring.</p>
+    <div class="metric-chip-cloud">
+      <span class="metric-chip">Total Revenue</span>
+      <span class="metric-chip">Membership Aktif</span>
+      <span class="metric-chip">Total Transaksi</span>
+      <span class="metric-chip">Rata-rata Revenue</span>
+      <span class="metric-chip">Sumber Revenue</span>
+      <span class="metric-chip">Metode Pembayaran</span>
+      <span class="metric-chip">Retensi Member</span>
+      <span class="metric-chip">Member Baru</span>
+      <span class="metric-chip">Member Akan Expired</span>
+      <span class="metric-chip">Performa Kelas</span>
+      <span class="metric-chip">Revenue Produk</span>
+      <span class="metric-chip">Kehadiran</span>
+      <span class="metric-chip">Revenue Sesi</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MEMBER SELF-SERVICE ============ -->
+<section class="section" id="member-area">
+  <div class="wrap reveal" style="display:grid; gap:40px; grid-template-columns:1fr;">
+    <div class="center">
+      <p class="eyebrow">Member Area</p>
+      <h2 class="section-title">Member Anda Juga Punya<br>Pengalaman Sendiri</h2>
+      <p class="section-sub">Member bisa mengakses informasi mereka sendiri tanpa perlu bantuan admin untuk setiap hal kecil. Member Area yang sudah berjalan mendukung login nomor HP, status membership, kartu member digital, dan program latihan.</p>
+    </div>
+    <div class="mockup-frame" style="max-width: 480px; margin: 0 auto;">
+      <div class="mockup-chrome"><span></span><span></span><span></span></div>
+      <img src="screenshots/member-status.png" alt="Halaman Status Member XNK Gym OS: masa aktif, sisa sesi PT dan kelas, serta paket aktif" loading="lazy" width="1600" height="1600">
+    </div>
+    <div class="center">
+      <a class="btn btn-primary" href="#demo">Coba Pengalaman Member &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUTOMATION BEFORE/AFTER ============ -->
+<section class="section alt">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Otomatisasi</p>
+    <h2 class="section-title">Lebih Sedikit Kerja Manual.<br>Lebih Banyak Kontrol.</h2>
+  </div>
+  <div class="wrap reveal">
+    <div class="compare-grid">
+      <div class="compare-col before">
+        <h3>Sebelum</h3>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Catatan manual</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Spreadsheet tercecer</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Cek tanggal kadaluarsa satu per satu</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Kirim reminder manual</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Proses pembayaran terpisah</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Laporan manual</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/></svg> Tracking member yang sulit</li>
+        </ul>
+      </div>
+      <div class="compare-col after">
+        <h3>Dengan XNK Gym OS</h3>
+        <ul>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Data member terpusat</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Status membership otomatis</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Transaksi terintegrasi</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Tracking check-in</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Laporan dashboard</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Template pesan WhatsApp</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Kartu member digital</li>
+          <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Monitoring staf</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INTEGRATIONS ============ -->
+<section class="section">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Integrasi</p>
+    <h2 class="section-title">WhatsApp &amp; Pembayaran</h2>
+  </div>
+  <div class="wrap reveal">
+    <div class="integration-grid">
+      <div class="integration-card">
+        <div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.35 0-2.63-.32-3.76-.9L3 21l1.9-5.7A8.5 8.5 0 1 1 21 11.5Z"/></svg></div>
+        <h3>Template WhatsApp</h3>
+        <ul>
+          <li>Komunikasi member</li>
+          <li>Feedback</li>
+          <li>Reminder kadaluarsa</li>
+          <li>Kartu member digital</li>
+        </ul>
+      </div>
+      <div class="integration-card">
+        <div class="icon"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><line x1="14" y1="14" x2="14" y2="21"/><line x1="21" y1="17.5" x2="21" y2="17.51"/><line x1="17.5" y1="14" x2="17.5" y2="17.5"/><line x1="14" y1="17.5" x2="17.5" y2="17.5"/><line x1="17.5" y1="21" x2="21" y2="21"/></svg></div>
+        <h3>QRIS</h3>
+        <ul>
+          <li>QRIS dinamis (BOQris)</li>
+          <li>Pengecekan status pembayaran</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ LIVE DEMO ============ -->
+<section class="section demo-section" id="demo">
+  <div class="wrap center reveal">
+    <p class="eyebrow" style="color: var(--ink-400);">Demo</p>
+    <h2 class="section-title">Jangan Cuma Dibaca.<br>Coba Langsung.</h2>
+    <p class="section-sub">Rasakan sendiri sistemnya dan lihat bagaimana XNK Gym OS masuk ke alur kerja gym yang sebenarnya.</p>
+  </div>
+  <div class="wrap reveal">
+    <div class="demo-grid">
+      <div class="demo-card">
+        <p class="role">Admin</p>
+        <p class="cred-row">Nama: <b>Demo Admin</b></p>
+        <p class="cred-row">Password: <b>demo1234</b></p>
+        <a class="try-btn" data-admin-url target="_blank" rel="noopener">Buka Admin</a>
+      </div>
+      <div class="demo-card">
+        <p class="role">Owner</p>
+        <p class="cred-row">Nama: <b>Demo Owner</b></p>
+        <p class="cred-row">Password: <b>demo1234</b></p>
+        <a class="try-btn" data-owner-url target="_blank" rel="noopener">Buka Owner</a>
+      </div>
+      <div class="demo-card">
+        <p class="role">Member</p>
+        <p class="cred-row">Nomor WA: <b>081234567890</b></p>
+        <a class="try-btn" data-member-url target="_blank" rel="noopener">Buka Member</a>
+      </div>
+    </div>
+    <p class="demo-note">Data demo -- bebas dieksplor, jangan dijadikan acuan data gym asli.</p>
+    <p class="demo-nopdf">Tanpa PDF. Tanpa penjelasan panjang. Langsung coba sistemnya.</p>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="cara-kerja">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Cara Kerja</p>
+    <h2 class="section-title">Tiga Langkah</h2>
+  </div>
+  <div class="wrap reveal">
+    <div class="steps">
+      <div class="step-card">
+        <p class="step-num">01</p>
+        <h3>Memahami Alur Kerja Anda</h3>
+        <p>Kami identifikasi bagaimana gym Anda saat ini menangani member, pembayaran, PT, kelas, kehadiran, dan laporan.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">02</p>
+        <h3>Menyesuaikan Sistem</h3>
+        <p>Sistem disesuaikan dengan alur kerja dan kebutuhan bisnis Anda -- bukan sistem yang sama persis untuk semua gym.</p>
+      </div>
+      <div class="step-card">
+        <p class="step-num">03</p>
+        <h3>Jalankan Gym Anda Secara Digital</h3>
+        <p>Tim Anda mendapat satu sistem terpusat untuk operasional dan manajemen sehari-hari.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHY XNK GYM OS ============ -->
+<section class="section alt">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Kenapa XNK Gym OS</p>
+    <h2 class="section-title">Dibangun untuk Cara Gym Anda Beroperasi</h2>
+  </div>
+  <div class="wrap reveal">
+    <div class="grid-4">
+      <div class="value-card">
+        <div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 4 5v6c0 5 3.5 8.5 8 11 4.5-2.5 8-6 8-11V5Z"/><path d="m9 12 2 2 4-4"/></svg></div>
+        <h3>Mengikuti Alur Kerja Anda</h3>
+        <p>Tidak semua gym beroperasi dengan cara yang sama.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg></div>
+        <h3>Satu Sistem Terpusat</h3>
+        <p>Semua data operasional tersimpan di satu tempat.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Visibilitas Level Owner</h3>
+        <p>Lihat revenue, member, kehadiran, produk, dan performa.</p>
+      </div>
+      <div class="value-card">
+        <div class="icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/><circle cx="10" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3>Pengalaman Member</h3>
+        <p>Member punya akses langsung ke informasi mereka sendiri.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PORTFOLIO ============ -->
+<section class="section">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Rekam Jejak</p>
+    <h2 class="section-title">Dibangun Lewat Proyek Nyata</h2>
+    <p class="section-sub">Beberapa situs dan sistem digital yang sudah ditangani XNK Production -- tidak semuanya sistem manajemen gym.</p>
+  </div>
+  <div class="wrap reveal">
+    <div class="portfolio-grid">
+      <a class="portfolio-card" href="https://alfafitness.id" target="_blank" rel="noopener">
+        <span><span class="name">Alfa Fitness</span><span class="domain">alfafitness.id</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a class="portfolio-card" href="https://abduhgarage.web.id" target="_blank" rel="noopener">
+        <span><span class="name">Abduh Garage</span><span class="domain">abduhgarage.web.id</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a class="portfolio-card" href="https://xnkbooking.my.id" target="_blank" rel="noopener">
+        <span><span class="name">XNK Booking</span><span class="domain">xnkbooking.my.id</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+      <a class="portfolio-card" href="https://kinex.id" target="_blank" rel="noopener">
+        <span><span class="name">KINEX</span><span class="domain">kinex.id</span></span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CUSTOM SYSTEM ============ -->
+<section class="section alt" id="custom">
+  <div class="wrap center reveal">
+    <p class="eyebrow">Custom</p>
+    <h2 class="section-title">Butuh Sesuatu yang Berbeda?<br>Kami Bangun Custom.</h2>
+    <p class="section-sub">Gym Anda mungkin punya alur kerja yang tidak cocok dengan paket software standar. Di situlah custom development berperan.</p>
+    <div class="custom-tags">
+      <span class="custom-tag">Struktur Membership</span>
+      <span class="custom-tag">Sistem Paket</span>
+      <span class="custom-tag">Booking</span>
+      <span class="custom-tag">POS</span>
+      <span class="custom-tag">Alur Pembayaran</span>
+      <span class="custom-tag">Role Staf</span>
+      <span class="custom-tag">Laporan</span>
+      <span class="custom-tag">Dashboard</span>
+      <span class="custom-tag">Member Area</span>
+      <span class="custom-tag">Alur WhatsApp</span>
+    </div>
+    <a class="btn btn-primary" href="mailto:xnkzzxd@gmail.com?subject=Diskusi%20Sistem%20XNK%20Gym%20OS">Diskusikan Sistem Anda &rarr;</a>
+  </div>
+</section>
+
+<!-- ============ FINAL CTA ============ -->
+<section class="section final-cta">
+  <div class="wrap reveal">
+    <h2 class="section-title">Gym Anda Sudah Punya Alur Kerja.<br>Sekarang Beri Sistemnya.</h2>
+    <p>Berhenti mengelola operasional lewat tools yang tercecer dan catatan manual. Bangun sistem yang mengikuti cara gym Anda benar-benar berjalan.</p>
+    <div class="hero-ctas">
+      <a class="btn btn-primary" href="#demo">Coba Demo Langsung &rarr;</a>
+      <a class="btn btn-secondary" href="mailto:xnkzzxd@gmail.com?subject=Bangun%20Sistem%20XNK%20Gym%20OS">Bangun Sistem Saya &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
 <footer>
   <img src="xnk-lockup-onblack.png" alt="XNK Productions" width="130">
   <p>&copy; XNK Productions</p>
 </footer>
 
+<script src="script.js"></script>
 </body>
 </html>
