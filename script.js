@@ -11,6 +11,17 @@ const MEMBER_URL = 'https://member.xnkproduction.web.id';
 // a second level deep (double-nested iframe -> 401 malformed request).
 const GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbyPsGZUY8C7uplUdOzQ7ejxpRlMeojonuG0FwJnJTlJa8gBUUDCQqzL7QGdeeUwN2cSag/exec';
 
+// ---- Warm up the Apps Script backend the moment this page loads ----
+// Cold-start on script.google.com is real platform latency, not
+// something client code removes -- but firing a background request now
+// means the container is very likely already warm by the time a visitor
+// actually clicks through to Admin/Owner. mode:'no-cors' because we
+// don't need (and CORS won't let us read) the response -- we only need
+// Google's server to actually run doGet() once, same as a real visit.
+[GAS_EXEC_URL + '?view=admin', GAS_EXEC_URL + '?view=owner'].forEach((url) => {
+  fetch(url, { mode: 'no-cors' }).catch(() => {});
+});
+
 document.querySelectorAll('[data-admin-url]').forEach((el) => { el.href = ADMIN_URL; });
 document.querySelectorAll('[data-owner-url]').forEach((el) => { el.href = OWNER_URL; });
 document.querySelectorAll('[data-member-url]').forEach((el) => { el.href = MEMBER_URL; });
