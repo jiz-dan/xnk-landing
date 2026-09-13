@@ -5,6 +5,12 @@ const ADMIN_URL = 'https://admin.xnkproduction.web.id';
 const OWNER_URL = 'https://owner.xnkproduction.web.id';
 const MEMBER_URL = 'https://member.xnkproduction.web.id';
 
+// Inline embed (below) hits the Apps Script exec URL DIRECTLY, not the
+// wrapper subdomains above -- those wrappers are themselves an iframe
+// around this same exec URL, and Google's sandbox refuses to be framed
+// a second level deep (double-nested iframe -> 401 malformed request).
+const GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbyPsGZUY8C7uplUdOzQ7ejxpRlMeojonuG0FwJnJTlJa8gBUUDCQqzL7QGdeeUwN2cSag/exec';
+
 document.querySelectorAll('[data-admin-url]').forEach((el) => { el.href = ADMIN_URL; });
 document.querySelectorAll('[data-owner-url]').forEach((el) => { el.href = OWNER_URL; });
 document.querySelectorAll('[data-member-url]').forEach((el) => { el.href = MEMBER_URL; });
@@ -26,7 +32,11 @@ if (hamburger && mobileNav) {
 // Click "Coba di Sini" (or a tab in the open panel) to load that role's
 // live app directly in an iframe on this page -- no new tab needed.
 // Lazy: iframe src is only ever set on first click, never on page load.
-const EMBED_URLS = { admin: ADMIN_URL, owner: OWNER_URL, member: MEMBER_URL };
+const EMBED_URLS = {
+  admin: GAS_EXEC_URL + '?view=admin',
+  owner: GAS_EXEC_URL + '?view=owner&adminUrl=' + encodeURIComponent(ADMIN_URL + '/'),
+  member: GAS_EXEC_URL + '?view=member',
+};
 const embedPanel = document.getElementById('embedPanel');
 const embedFrame = document.getElementById('embedFrame');
 const embedLoading = document.getElementById('embedLoading');
