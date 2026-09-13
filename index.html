@@ -78,7 +78,7 @@
   <div class="wrap reveal" style="margin-top: 48px;">
     <div class="mockup-frame">
       <div class="mockup-chrome"><span></span><span></span><span></span></div>
-      <img src="screenshots/admin-dashboard.png" alt="Tampilan Dashboard Admin XNK Gym OS: ringkasan check-in, member baru, transaksi, quick visit, dan panel POS Kasir" width="1600" height="900">
+      <img src="screenshots/admin-dashboard.png" alt="Tampilan Dashboard Admin XNK Gym OS: ringkasan check-in, member baru, transaksi, quick visit, dan panel POS Kasir" width="1600" height="800">
     </div>
   </div>
 </section>
@@ -152,7 +152,7 @@
         </ul>
       </div>
       <div class="explorer-visual">
-        <img src="screenshots/admin-dashboard.png" alt="Panel POS Kasir XNK Gym OS: grid produk, keranjang belanja, dan total pembayaran" loading="lazy" width="1600" height="900">
+        <img src="screenshots/admin-dashboard.png" alt="Panel POS Kasir XNK Gym OS: grid produk, keranjang belanja, dan total pembayaran" loading="lazy" width="1600" height="800">
       </div>
     </div>
 
@@ -208,7 +208,7 @@
         </ul>
       </div>
       <div class="explorer-visual">
-        <img src="screenshots/owner-ringkasan.png" alt="Dashboard Ringkasan Owner XNK Gym OS: transaksi terbaru, member baru, quick visit, penjualan POS, dan check-in member" loading="lazy" width="1600" height="900">
+        <img src="screenshots/owner-ringkasan.png" alt="Dashboard Ringkasan Owner XNK Gym OS: transaksi terbaru, member baru, quick visit, penjualan POS, dan check-in member" loading="lazy" width="1600" height="800">
       </div>
     </div>
   </div>
@@ -248,7 +248,7 @@
     </div>
     <div class="mockup-frame" style="max-width: 480px; margin: 0 auto;">
       <div class="mockup-chrome"><span></span><span></span><span></span></div>
-      <img src="screenshots/member-status.png" alt="Halaman Status Member XNK Gym OS: masa aktif, sisa sesi PT dan kelas, serta paket aktif" loading="lazy" width="1600" height="1600">
+      <img src="screenshots/member-status.png" alt="Halaman Status Member XNK Gym OS: masa aktif, sisa sesi PT dan kelas, serta paket aktif" loading="lazy" width="1600" height="800">
     </div>
     <div class="center">
       <a class="btn btn-primary" href="#demo">Coba Pengalaman Member &rarr;</a>
@@ -336,20 +336,39 @@
         <p class="role">Admin</p>
         <p class="cred-row">Nama: <b>Demo Admin</b></p>
         <p class="cred-row">Password: <b>demo1234</b></p>
-        <a class="try-btn" data-admin-url target="_blank" rel="noopener">Buka Admin</a>
+        <button class="try-btn" data-embed-role="admin">Coba di Sini &rarr;</button>
+        <a class="try-btn-alt" data-admin-url target="_blank" rel="noopener">Buka di tab baru &#8599;</a>
       </div>
       <div class="demo-card">
         <p class="role">Owner</p>
         <p class="cred-row">Nama: <b>Demo Owner</b></p>
         <p class="cred-row">Password: <b>demo1234</b></p>
-        <a class="try-btn" data-owner-url target="_blank" rel="noopener">Buka Owner</a>
+        <button class="try-btn" data-embed-role="owner">Coba di Sini &rarr;</button>
+        <a class="try-btn-alt" data-owner-url target="_blank" rel="noopener">Buka di tab baru &#8599;</a>
       </div>
       <div class="demo-card">
         <p class="role">Member</p>
         <p class="cred-row">Nomor WA: <b>081234567890</b></p>
-        <a class="try-btn" data-member-url target="_blank" rel="noopener">Buka Member</a>
+        <button class="try-btn" data-embed-role="member">Coba di Sini &rarr;</button>
+        <a class="try-btn-alt" data-member-url target="_blank" rel="noopener">Buka di tab baru &#8599;</a>
       </div>
     </div>
+
+    <div class="embed-panel" id="embedPanel" hidden>
+      <div class="embed-panel-bar">
+        <div class="embed-tabs">
+          <button class="embed-tab" data-embed-role="admin">Admin</button>
+          <button class="embed-tab" data-embed-role="owner">Owner</button>
+          <button class="embed-tab" data-embed-role="member">Member</button>
+        </div>
+        <button class="embed-close" id="embedClose" aria-label="Tutup demo di halaman ini">Tutup &times;</button>
+      </div>
+      <div class="embed-frame-wrap">
+        <div class="embed-loading" id="embedLoading">Memuat sistemnya...</div>
+        <iframe id="embedFrame" title="XNK Gym OS -- Demo Langsung" allow="clipboard-write" loading="lazy"></iframe>
+      </div>
+    </div>
+
     <p class="demo-note">Data demo -- bebas dieksplor, jangan dijadikan acuan data gym asli.</p>
     <p class="demo-nopdf">Tanpa PDF. Tanpa penjelasan panjang. Langsung coba sistemnya.</p>
   </div>

@@ -22,6 +22,44 @@ if (hamburger && mobileNav) {
   });
 }
 
+// ---- Inline demo embed ----
+// Click "Coba di Sini" (or a tab in the open panel) to load that role's
+// live app directly in an iframe on this page -- no new tab needed.
+// Lazy: iframe src is only ever set on first click, never on page load.
+const EMBED_URLS = { admin: ADMIN_URL, owner: OWNER_URL, member: MEMBER_URL };
+const embedPanel = document.getElementById('embedPanel');
+const embedFrame = document.getElementById('embedFrame');
+const embedLoading = document.getElementById('embedLoading');
+const embedTabs = document.querySelectorAll('.embed-tab');
+const embedClose = document.getElementById('embedClose');
+
+function openEmbed(role) {
+  const url = EMBED_URLS[role];
+  if (!url) return;
+  embedPanel.hidden = false;
+  embedLoading.style.display = 'flex';
+  embedTabs.forEach((t) => t.setAttribute('aria-selected', t.getAttribute('data-embed-role') === role ? 'true' : 'false'));
+  if (embedFrame.getAttribute('data-loaded-role') !== role) {
+    embedFrame.src = url;
+    embedFrame.setAttribute('data-loaded-role', role);
+  } else {
+    embedLoading.style.display = 'none';
+  }
+  embedPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+document.querySelectorAll('[data-embed-role]').forEach((el) => {
+  el.addEventListener('click', () => openEmbed(el.getAttribute('data-embed-role')));
+});
+embedFrame.addEventListener('load', () => { embedLoading.style.display = 'none'; });
+if (embedClose) {
+  embedClose.addEventListener('click', () => {
+    embedPanel.hidden = true;
+    embedFrame.src = 'about:blank';
+    embedFrame.removeAttribute('data-loaded-role');
+  });
+}
+
 // ---- Feature explorer tabs ----
 const tabs = document.querySelectorAll('.explorer-tab');
 const panels = document.querySelectorAll('.explorer-panel');
