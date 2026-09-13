@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <title>XNK Gym OS</title>
-<meta name="description" content="XNK Gym OS -- sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner.">
+<meta name="description" content="XNK Gym OS -- sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner. Coba demo langsung.">
 <meta name="theme-color" content="#0A0A0A">
 <link rel="canonical" href="https://xnkproduction.web.id/">
 
@@ -19,7 +19,7 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="XNK Gym OS">
 <meta property="og:title" content="XNK Gym OS">
-<meta property="og:description" content="Sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner.">
+<meta property="og:description" content="Sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner. Coba demo langsung.">
 <meta property="og:url" content="https://xnkproduction.web.id/">
 <meta property="og:image" content="https://xnkproduction.web.id/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -28,48 +28,146 @@
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="XNK Gym OS">
-<meta name="twitter:description" content="Sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner.">
+<meta name="twitter:description" content="Sistem manajemen gym: membership, PT & kelas, POS, absensi, payroll, dan laporan owner. Coba demo langsung.">
 <meta name="twitter:image" content="https://xnkproduction.web.id/og-image.png">
 
 <style>
-  :root { --ink-900: #0A0A0A; --ink-500: #666666; --ink-100: #EFEFEF; }
-  html, body { margin: 0; padding: 0; height: 100%; }
+  :root {
+    --ink-900: #0A0A0A; --ink-800: #1C1C1C; --ink-700: #2E2E2E; --ink-600: #4A4A4A;
+    --ink-500: #666666; --ink-400: #909090; --ink-300: #BDBDBD; --ink-200: #DEDEDE;
+    --ink-100: #EFEFEF; --ink-050: #F7F7F7; --white: #FFFFFF; --bg-app: #F5F5F5;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
   body {
+    background: var(--bg-app);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    color: var(--ink-800);
+  }
+
+  /* ---- Hero ---- */
+  .hero {
     background: linear-gradient(-45deg, #F7F7F7, #F0F0F0, #EDEDED, #F7F7F7);
     background-size: 400% 400%; animation: meshDrift 15s ease infinite;
     display: flex; align-items: center; justify-content: center;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    padding: 64px 20px 56px;
   }
   @keyframes meshDrift { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-  .card {
-    width: 100%; max-width: 380px; margin: 20px; padding: 36px 30px;
-    background: #fff; border-radius: 24px;
+  .hero-card {
+    width: 100%; max-width: 560px; padding: 40px 34px;
+    background: var(--white); border-radius: 24px;
     box-shadow: 0 20px 40px -10px rgba(0,0,0,0.08), 0 8px 16px -4px rgba(0,0,0,0.04);
     text-align: center;
   }
-  .card h1 {
-    margin: 0 0 8px; font-size: 15px; font-weight: 800; letter-spacing: 0.02em;
+  .hero-card h1 {
+    margin: 0 0 10px; font-size: 16px; font-weight: 800; letter-spacing: 0.02em;
     text-transform: uppercase; color: var(--ink-900);
   }
-  .card p { margin: 0 0 22px; font-size: 12.5px; color: var(--ink-500); line-height: 1.5; }
-  .links { display: flex; justify-content: center; gap: 20px; font-size: 13px; font-weight: 700; }
-  .links a { color: var(--ink-900); text-decoration: none; border-bottom: 1px solid var(--ink-100); padding-bottom: 2px; }
-  .links a:hover { border-color: var(--ink-900); }
+  .hero-card p { margin: 0; font-size: 13.5px; color: var(--ink-500); line-height: 1.6; }
+
+  /* ---- Sections ---- */
+  section.block { max-width: 880px; margin: 0 auto; padding: 48px 20px; }
+  h2.section-title {
+    margin: 0 0 22px; font-size: 12px; font-weight: 800; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--ink-600); text-align: center;
+  }
+
+  /* ---- Feature grid ---- */
+  .features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+  .feature {
+    background: var(--white); border: 1px solid var(--ink-100); border-radius: 14px;
+    padding: 16px 14px;
+  }
+  .feature .name { font-size: 12.5px; font-weight: 700; color: var(--ink-800); margin: 0 0 4px; }
+  .feature .desc { font-size: 11.5px; color: var(--ink-500); line-height: 1.45; margin: 0; }
+
+  /* ---- Demo cards ---- */
+  .demo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .demo-card {
+    background: var(--white); border: 1px solid var(--ink-100); border-radius: 16px;
+    padding: 22px 18px; text-align: center;
+  }
+  .demo-card .role {
+    font-size: 12px; font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--ink-900); margin: 0 0 12px;
+  }
+  .demo-card .cred-row { font-size: 12px; color: var(--ink-600); margin: 0 0 4px; }
+  .demo-card .cred-row b { color: var(--ink-800); font-weight: 700; }
+  .demo-card a.try-btn {
+    display: inline-block; margin-top: 14px; padding: 9px 20px; border-radius: 999px;
+    background: var(--ink-900); color: var(--white); text-decoration: none;
+    font-size: 12px; font-weight: 700;
+  }
+  .demo-card a.try-btn:hover { background: var(--ink-700); }
+  .demo-note {
+    text-align: center; font-size: 11.5px; color: var(--ink-400); margin: 18px 0 0;
+  }
+
+  /* ---- Footer ---- */
+  footer {
+    background: var(--ink-900); padding: 36px 20px; display: flex;
+    flex-direction: column; align-items: center; gap: 10px;
+  }
+  footer img { width: 130px; height: auto; }
+  footer p { margin: 0; font-size: 11px; color: var(--ink-400); }
+
+  @media (max-width: 720px) {
+    .features { grid-template-columns: repeat(2, 1fr); }
+    .demo-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
-<!-- Landing polos -- bukan role-picker lagi. Admin dan Owner sekarang
-     masing-masing subdomain/repo sendiri (xnk-admin, xnk-owner), jadi
-     link di sini adalah URL LUAR penuh, bukan file relatif satu repo
-     seperti sebelumnya. -->
-<div class="card">
-  <h1>XNK Gym OS</h1>
-  <p>Sistem manajemen gym: membership, PT &amp; kelas, POS, absensi, payroll, dan laporan owner.</p>
-  <div class="links">
-    <a href="https://admin.xnkproduction.web.id">Admin</a>
-    <a href="https://owner.xnkproduction.web.id">Owner</a>
-    <a href="https://member.xnkproduction.web.id">Member</a>
+
+<div class="hero">
+  <div class="hero-card">
+    <h1>XNK Gym OS</h1>
+    <p>Membership, PT dan paket kelas, POS, absensi, payroll, booking kelas, invoicing, dan laporan owner.</p>
   </div>
 </div>
+
+<section class="block">
+  <h2 class="section-title">Fitur</h2>
+  <div class="features">
+    <div class="feature"><p class="name">Membership &amp; Renewal</p><p class="desc">Registrasi, perpanjangan, cuti, riwayat member.</p></div>
+    <div class="feature"><p class="name">POS Kasir</p><p class="desc">Penjualan produk di front desk.</p></div>
+    <div class="feature"><p class="name">Booking Kelas</p><p class="desc">Jadwal mingguan, sesi kelas, dan pemesanan.</p></div>
+    <div class="feature"><p class="name">Absensi QR</p><p class="desc">Check-in QR, Google Form, manual, dan arsip.</p></div>
+    <div class="feature"><p class="name">Payroll</p><p class="desc">Absensi shift, lembur, dan gaji staf.</p></div>
+    <div class="feature"><p class="name">Dashboard &amp; Laporan Owner</p><p class="desc">Metrik, laporan, dan agregasi otomatis.</p></div>
+    <div class="feature"><p class="name">Notifikasi WhatsApp</p><p class="desc">Pengingat expired, feedback, ucapan ulang tahun.</p></div>
+    <div class="feature"><p class="name">Pembayaran QRIS</p><p class="desc">Invoicing dengan QRIS dinamis.</p></div>
+  </div>
+</section>
+
+<section class="block">
+  <h2 class="section-title">Coba Demo</h2>
+  <div class="demo-grid">
+    <div class="demo-card">
+      <p class="role">Admin</p>
+      <p class="cred-row">Nama: <b>Demo Admin</b></p>
+      <p class="cred-row">Password: <b>demo1234</b></p>
+      <a class="try-btn" href="https://admin.xnkproduction.web.id" target="_blank" rel="noopener">Buka Admin</a>
+    </div>
+    <div class="demo-card">
+      <p class="role">Owner</p>
+      <p class="cred-row">Nama: <b>Demo Owner</b></p>
+      <p class="cred-row">Password: <b>demo1234</b></p>
+      <a class="try-btn" href="https://owner.xnkproduction.web.id" target="_blank" rel="noopener">Buka Owner</a>
+    </div>
+    <div class="demo-card">
+      <p class="role">Member</p>
+      <p class="cred-row">Nomor WA: <b>081234567890</b></p>
+      <a class="try-btn" href="https://member.xnkproduction.web.id" target="_blank" rel="noopener">Buka Member</a>
+    </div>
+  </div>
+  <p class="demo-note">Data demo -- bebas dieksplor, jangan dijadikan acuan data gym asli.</p>
+</section>
+
+<footer>
+  <img src="xnk-lockup-onblack.png" alt="XNK Productions" width="130">
+  <p>&copy; XNK Productions</p>
+</footer>
+
 </body>
 </html>
