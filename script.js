@@ -5,10 +5,9 @@ const ADMIN_URL = 'https://admin.xnkproduction.web.id';
 const OWNER_URL = 'https://owner.xnkproduction.web.id';
 const MEMBER_URL = 'https://member.xnkproduction.web.id';
 
-// Inline embed (below) hits the Apps Script exec URL DIRECTLY, not the
-// wrapper subdomains above -- those wrappers are themselves an iframe
-// around this same exec URL, and Google's sandbox refuses to be framed
-// a second level deep (double-nested iframe -> 401 malformed request).
+// GAS_EXEC_URL is kept only to warm up the Apps Script backend below --
+// the demo buttons themselves now link straight to the wrapper
+// subdomains above and open in a new tab.
 const GAS_EXEC_URL = 'https://script.google.com/macros/s/AKfycbyPsGZUY8C7uplUdOzQ7ejxpRlMeojonuG0FwJnJTlJa8gBUUDCQqzL7QGdeeUwN2cSag/exec';
 
 // ---- Warm up the Apps Script backend the moment this page loads ----
@@ -36,48 +35,6 @@ if (hamburger && mobileNav) {
   });
   mobileNav.querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => mobileNav.classList.remove('open'));
-  });
-}
-
-// ---- Inline demo embed ----
-// Click "Coba di Sini" (or a tab in the open panel) to load that role's
-// live app directly in an iframe on this page -- no new tab needed.
-// Lazy: iframe src is only ever set on first click, never on page load.
-const EMBED_URLS = {
-  admin: GAS_EXEC_URL + '?view=admin',
-  owner: GAS_EXEC_URL + '?view=owner&adminUrl=' + encodeURIComponent(ADMIN_URL + '/'),
-  member: GAS_EXEC_URL + '?view=member',
-};
-const embedPanel = document.getElementById('embedPanel');
-const embedFrame = document.getElementById('embedFrame');
-const embedLoading = document.getElementById('embedLoading');
-const embedTabs = document.querySelectorAll('.embed-tab');
-const embedClose = document.getElementById('embedClose');
-
-function openEmbed(role) {
-  const url = EMBED_URLS[role];
-  if (!url) return;
-  embedPanel.hidden = false;
-  embedLoading.style.display = 'flex';
-  embedTabs.forEach((t) => t.setAttribute('aria-selected', t.getAttribute('data-embed-role') === role ? 'true' : 'false'));
-  if (embedFrame.getAttribute('data-loaded-role') !== role) {
-    embedFrame.src = url;
-    embedFrame.setAttribute('data-loaded-role', role);
-  } else {
-    embedLoading.style.display = 'none';
-  }
-  embedPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
-document.querySelectorAll('[data-embed-role]').forEach((el) => {
-  el.addEventListener('click', () => openEmbed(el.getAttribute('data-embed-role')));
-});
-embedFrame.addEventListener('load', () => { embedLoading.style.display = 'none'; });
-if (embedClose) {
-  embedClose.addEventListener('click', () => {
-    embedPanel.hidden = true;
-    embedFrame.src = 'about:blank';
-    embedFrame.removeAttribute('data-loaded-role');
   });
 }
 
